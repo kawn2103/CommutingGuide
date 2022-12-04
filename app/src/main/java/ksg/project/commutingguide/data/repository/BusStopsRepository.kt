@@ -2,15 +2,15 @@ package ksg.project.commutingguide.data.repository
 
 import kotlinx.coroutines.flow.Flow
 import ksg.project.commutingguide.data.model.busStops.BusStops
-import retrofit2.Response
+import ksg.project.commutingguide.utils.UiState
 
 interface BusStopsRepository {
 
-    suspend fun searchBusStops(
+    fun searchBusStops(
         serviceKey: String,
         pageNo: Int,
         numOfRows: Int,
         bstopnm: String?,
         arsno: Int?,
-    ): Response<BusStops>
+    ): Flow<UiState<BusStops>>
 }

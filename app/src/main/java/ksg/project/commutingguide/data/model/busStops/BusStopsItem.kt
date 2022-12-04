@@ -1,7 +1,7 @@
 package ksg.project.commutingguide.data.model.busStops
-
+import com.tickaroo.tikxml.annotation.Xml
 import com.tickaroo.tikxml.annotation.PropertyElement
-
+@Xml(name = "item")
 data class BusStopsItem(
     @PropertyElement(name = "bstopid")
     var bstopid: String,
