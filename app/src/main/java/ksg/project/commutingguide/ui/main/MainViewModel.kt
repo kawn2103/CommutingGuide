@@ -5,6 +5,7 @@ import androidx.databinding.ObservableField
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import dagger.hilt.android.lifecycle.HiltViewModel
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.flow.*
 import kotlinx.coroutines.launch
 import ksg.project.commutingguide.data.model.busStops.BusStops
@@ -30,12 +31,13 @@ class MainViewModel @Inject constructor(
         val result = busStopsRepository.searchBusStops(Constants.API_KEY,count.get() ?: 1,10,null,null)
             .stateIn(
                 scope = viewModelScope,
-                started = SharingStarted.WhileSubscribed(5000L),
+                started = SharingStarted.Eagerly,
                 initialValue = UiState.Loading
             )
+        delay(10000)
         Log.d("gwan2103","result >>>> $result")
         Log.d("gwan2103","result.value >>>> ${result.value}")
-        _busStops.emit(result.value)
+        //_busStops.emit(result.value)
     }
 
     /*fun callBusStops(): StateFlow<UiState<BusStops>> {
