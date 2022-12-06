@@ -22,10 +22,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main) {
 
         /*collectLatestStateFlow(viewModel.busStops) {
             Log.d("gwan2103","busStops >>>>>> $it")
-        }
-
-        collectLatestStateFlow(viewModel._busStops) {
-            Log.d("gwan2103","_busStops >>>>>> $it")
         }*/
+
     }
 }
