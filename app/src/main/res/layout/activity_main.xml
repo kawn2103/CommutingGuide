@@ -8,6 +8,9 @@
         <variable
             name="vm"
             type="ksg.project.commutingguide.ui.main.MainViewModel" />
+        <variable
+            name="adapter"
+            type="ksg.project.commutingguide.ui.main.BusStopsAdapter" />
     </data>
 
     <androidx.constraintlayout.widget.ConstraintLayout
@@ -24,7 +27,13 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintHeight_percent="0.7"
-            app:layout_constraintVertical_bias="1"/>
+            app:layout_constraintVertical_bias="1"
+            android:scrollbarStyle="outsideOverlay"
+            android:scrollbars="vertical"
+            app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
+            app:toast="@{UiStateKt.throwableOrNull(vm.busStops)}"
+            app:adapter="@{adapter}"
+            app:championItems="@{vm.busStops}"/>
 
         <TextView
             android:id="@+id/countTextView"
