@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+        <variable
+            name="busStop"
+            type="ksg.project.commutingguide.data.model.busStops.BusStopsItem" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="10dp">
+
+        <TextView
+            android:id="@+id/idTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="20sp"
+            android:text="@{`id: `+busStop.bstopid}"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/nameTextView"/>
+
+        <TextView
+            android:id="@+id/nameTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="20sp"
+            android:text="@{`name: `+busStop.bstopnm}"
+            app:layout_constraintTop_toTopOf="@id/idTextView"
+            app:layout_constraintStart_toEndOf="@id/idTextView"/>
+
+
+        <TextView
+            android:id="@+id/arsTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="20sp"
+            android:text="@{`id: `+busStop.arsno}"
+            app:layout_constraintTop_toBottomOf="@id/idTextView"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/typeTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="20sp"
+            android:text="@{`type: `+busStop.stoptype}"
+            app:layout_constraintTop_toBottomOf="@id/idTextView"
+            app:layout_constraintStart_toEndOf="@id/arsTextView"/>
+
+        <TextView
+            android:id="@+id/gpsXTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="20sp"
+            android:text="@{`id: `+busStop.gpsx}"
+            app:layout_constraintTop_toBottomOf="@id/arsTextView"
+            app:layout_constraintStart_toStartOf="parent"/>
+
+        <TextView
+            android:id="@+id/gpsYTextView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:textSize="20sp"
+            android:text="@{`id: `+busStop.gpsy}"
+            app:layout_constraintTop_toTopOf="@id/gpsXTextView"
+            app:layout_constraintStart_toEndOf="@id/gpsXTextView"/>
+    </androidx.constraintlayout.widget.ConstraintLayout>
+</layout>
