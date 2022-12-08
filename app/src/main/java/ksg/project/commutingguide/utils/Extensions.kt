@@ -7,10 +7,10 @@ import kotlinx.coroutines.flow.Flow
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
 import ksg.project.commutingguide.ui.main.MainActivity
-
+//flow 데이터 처리
 fun <T> MainActivity.collectLatestStateFlow(flow: Flow<T>, collect: suspend (T) -> Unit) {
-    lifecycleScope.launch {
-        repeatOnLifecycle(Lifecycle.State.STARTED) {
+    lifecycleScope.launch {//lifecycle에 연동
+        repeatOnLifecycle(Lifecycle.State.STARTED) {//
             flow.collectLatest(collect)
         }
     }

@@ -18,6 +18,7 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
+        <!--데이터 바인딩을 사용해서 데이터 파싱-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/itemRecyclerView"
             android:layout_width="0dp"
@@ -33,8 +34,9 @@
             app:layoutManager="androidx.recyclerview.widget.GridLayoutManager"
             app:toast="@{UiStateKt.throwableOrNull(vm.busStops)}"
             app:adapter="@{adapter}"
-            app:championItems="@{vm.busStops}"/>
+            app:busStopItems="@{vm.busStops}"/>
 
+        <!--옵져블 데이터로 데이터 관찰 및 반영-->
         <TextView
             android:id="@+id/countTextView"
             android:layout_width="wrap_content"
@@ -45,6 +47,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
+        <!--뷰모델의 함수 실행-->
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/plusButton"
             android:layout_width="wrap_content"
@@ -56,6 +59,7 @@
             app:layout_constraintRight_toRightOf="parent"
             app:layout_constraintBottom_toBottomOf="parent" />
 
+        <!--데이터 바인딩 어댑터를 사용해서 데이터 파싱-->
         <ProgressBar
             android:id="@+id/loading_bar"
             android:layout_width="wrap_content"

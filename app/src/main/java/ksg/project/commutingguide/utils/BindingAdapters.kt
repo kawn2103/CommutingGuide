@@ -9,6 +9,7 @@ import kotlinx.coroutines.flow.StateFlow
 import ksg.project.commutingguide.data.model.busStops.BusStops
 import ksg.project.commutingguide.ui.main.BusStopsAdapter
 
+//xml에 선언된 함수명 선언 및 해당 함수에 해당하는 로직 선언
 @BindingAdapter("show")
 fun ProgressBar.bindShow(uiState:UiState<*>) {
     visibility = if (uiState is UiState.Loading) View.VISIBLE else View.GONE
@@ -26,8 +27,8 @@ fun RecyclerView.bindAdapter(adapter: RecyclerView.Adapter<*>) {
     this.adapter = adapter
 }
 
-@BindingAdapter("championItems")
-fun RecyclerView.bindChampionItems(uiState: UiState<BusStops>) {
+@BindingAdapter("busStopItems")
+fun RecyclerView.bindBusStopItems(uiState: UiState<BusStops>) {
     val boundAdapter = this.adapter
     if (boundAdapter is BusStopsAdapter) {
         val busStopsList = uiState.successOrNull()?.body?.items?.item
