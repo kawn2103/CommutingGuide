@@ -2,6 +2,7 @@ package ksg.project.commutingguide.utils
 
 //UI에 반영하는 상태 클래스
 sealed class UiState<out T> {
+    object None: UiState<Nothing>()  //데이터의 로딩 상태
     object Loading: UiState<Nothing>()  //데이터의 로딩 상태
     data class Success<T>(val data: T): UiState<T>()
     data class Error(val error: Throwable?): UiState<Nothing>()

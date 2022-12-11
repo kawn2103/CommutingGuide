@@ -4,15 +4,15 @@ import com.tickaroo.tikxml.annotation.PropertyElement
 @Xml(name = "item")
 data class BusStopsItem(
     @PropertyElement(name = "bstopid")
-    var bstopid: String,
+    var bstopid: String?,
     @PropertyElement(name = "bstopnm")
-    var bstopnm: String,
+    var bstopnm: String?,
     @PropertyElement(name="arsno")
-    var arsno: String,
+    var arsno: String?,
     @PropertyElement(name = "gpsx")
-    var gpsx: String,
+    var gpsx: String?,
     @PropertyElement(name = "gpsy")
-    var gpsy: String,
+    var gpsy: String?,
     @PropertyElement(name="stoptype")
-    var stoptype: String,
+    var stoptype: String?,
 )

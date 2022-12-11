@@ -19,10 +19,10 @@ import javax.inject.Inject
 class MainViewModel @Inject constructor(
     private val busStopsRepository: BusStopsRepository
 ): ViewModel(){
-    //데이터 옵저빙을 위한 옵저버블 데이터 선언
+    /*//데이터 옵저빙을 위한 옵저버블 데이터 선언
     var count = ObservableField(0)
     //내부에서 데이터를 받아오기 위한 뮤터블플로우 데이터 선언
-    private val _busStops: MutableStateFlow<UiState<BusStops>> = MutableStateFlow(UiState.Loading)
+    private val _busStops: MutableStateFlow<UiState<BusStops>> = MutableStateFlow(UiState.None)
     //view에 데이터를 반영하기 위한 데이터 선언
     val busStops: StateFlow<UiState<BusStops>> = _busStops.asStateFlow()
 
@@ -37,18 +37,18 @@ class MainViewModel @Inject constructor(
             //데이터 통신 시 시작 상태 변경
             _busStops.value = UiState.Loading
             //데이터 통신 및 결과 데이터 수집
-            busStopsRepository.searchBusStops(Constants.API_KEY,count.get() ?: 1,10,null,null)
+            busStopsRepository.searchBusStops(Constants.API_KEY,count.get() ?: 1,10000,null,null)
                 .collect {
                     _busStops.value = it
                 }
         }
-    }
+    }*/
 
-    /*val busStops: StateFlow<UiState<BusStops>> =
-        busStopsRepository.searchBusStops(Constants.API_KEY,count.get() ?: 1,10,null,null)
+    val busStops: StateFlow<UiState<BusStops>> =
+        busStopsRepository.searchBusStops(Constants.API_KEY,1,10000,null,null)
             .stateIn(
                 scope = viewModelScope,
                 started = SharingStarted.WhileSubscribed(5000L),
                 initialValue = UiState.Loading
-            )*/
+            )
 }

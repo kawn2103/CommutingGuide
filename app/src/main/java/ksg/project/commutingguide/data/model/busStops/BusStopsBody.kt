@@ -5,11 +5,11 @@ import com.tickaroo.tikxml.annotation.PropertyElement
 @Xml(name = "body")
 data class BusStopsBody(
     @Element(name="items")
-    val items: BusStopsItems,
+    val items: BusStopsItems?,
     @PropertyElement(name="numOfRows")
-    val numOfRows: Int,
+    val numOfRows: Int?,
     @PropertyElement(name="pageNo")
-    val pageNo: Int,
+    val pageNo: Int?,
     @PropertyElement(name="totalCount")
-    val totalCount: Int,
+    val totalCount: Int?,
 )

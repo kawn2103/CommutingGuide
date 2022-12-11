@@ -18,6 +18,17 @@
         android:layout_height="match_parent"
         tools:context=".ui.main.MainActivity">
 
+        <fragment
+            android:id="@+id/mapFragment"
+            android:layout_width="0dp"
+            android:layout_height="0dp"
+            android:name="com.naver.maps.map.MapFragment"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintBottom_toTopOf="@id/itemRecyclerView"
+            />
+
         <!--데이터 바인딩을 사용해서 데이터 파싱-->
         <androidx.recyclerview.widget.RecyclerView
             android:id="@+id/itemRecyclerView"
@@ -36,7 +47,7 @@
             app:adapter="@{adapter}"
             app:busStopItems="@{vm.busStops}"/>
 
-        <!--옵져블 데이터로 데이터 관찰 및 반영-->
+        <!--옵져블 데이터로 데이터 관찰 및 반영
         <TextView
             android:id="@+id/countTextView"
             android:layout_width="wrap_content"
@@ -45,9 +56,9 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
+            app:layout_constraintTop_toTopOf="parent" />-->
 
-        <!--뷰모델의 함수 실행-->
+        <!--뷰모델의 함수 실행
         <androidx.appcompat.widget.AppCompatButton
             android:id="@+id/plusButton"
             android:layout_width="wrap_content"
@@ -57,18 +68,26 @@
             app:layout_constraintTop_toBottomOf="@id/countTextView"
             app:layout_constraintLeft_toLeftOf="parent"
             app:layout_constraintRight_toRightOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent" />
+            app:layout_constraintBottom_toBottomOf="parent" />-->
 
         <!--데이터 바인딩 어댑터를 사용해서 데이터 파싱-->
-        <ProgressBar
-            android:id="@+id/loading_bar"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:show="@{vm.busStops}"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintEnd_toEndOf="parent" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#99000000"
+            app:show="@{vm.busStops}">
+
+            <ProgressBar
+                android:id="@+id/loading_bar"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintEnd_toEndOf="parent" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 </layout>

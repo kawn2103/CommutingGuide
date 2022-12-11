@@ -5,5 +5,5 @@ import com.tickaroo.tikxml.annotation.Element
 @Xml(name = "items")
 data class BusStopsItems(
     @Element(name="item")
-    val item: List<BusStopsItem>,
+    val item: List<BusStopsItem?>,
 )

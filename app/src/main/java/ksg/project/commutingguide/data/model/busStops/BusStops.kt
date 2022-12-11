@@ -10,7 +10,7 @@ import com.tickaroo.tikxml.annotation.Xml
 @Xml(name = "response")
 data class BusStops(
     @Element(name="header")
-    val header: BusStopsHeader,
+    val header: BusStopsHeader?,
     @Element(name = "body")
-    val body: BusStopsBody,
+    val body: BusStopsBody?,
 )
