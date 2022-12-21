@@ -1,17 +1,13 @@
-package ksg.project.commutingguide.ui.main
+package ksg.project.commutingguide.ui.searchBusStops
 
-import android.app.ActivityOptions
 import android.os.Bundle
 import android.util.Log
 import android.view.Gravity
-import androidx.activity.viewModels
-import androidx.core.content.ContentProviderCompat.requireContext
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.ui.AppBarConfiguration
-import androidx.navigation.ui.navigateUp
-import androidx.navigation.ui.setupActionBarWithNavController
-import androidx.navigation.ui.setupWithNavController
+import android.view.LayoutInflater
+import android.view.View
+import android.view.ViewGroup
+import androidx.fragment.app.Fragment
+import androidx.fragment.app.viewModels
 import com.google.android.gms.location.FusedLocationProviderClient
 import com.google.android.gms.location.LocationServices
 import com.naver.maps.geometry.LatLng
@@ -24,22 +20,19 @@ import com.naver.maps.map.overlay.Marker
 import com.naver.maps.map.util.FusedLocationSource
 import dagger.hilt.android.AndroidEntryPoint
 import ksg.project.commutingguide.R
-import ksg.project.commutingguide.databinding.ActivityMainBinding
-import ksg.project.commutingguide.ui.base.BaseActivity
+import ksg.project.commutingguide.databinding.FragmentSearchBinding
+import ksg.project.commutingguide.ui.main.BusStopsAdapter
 import ksg.project.commutingguide.utils.collectLatestStateFlow
 import ksg.project.commutingguide.utils.successOrNull
-import okhttp3.internal.notifyAll
 
-//액티비티 di에 적용
-//AndroidEntryPoint => 화면 선언에 사용
 @AndroidEntryPoint
-class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main){
+class SearchFragment : Fragment(), OnMapReadyCallback {
+    private var _binding: FragmentSearchBinding? = null
+    private val binding get() = _binding!!
 
-    private lateinit var navController: NavController
-    private lateinit var appBarConfiguration: AppBarConfiguration
+    private val searchViewModel by viewModels<SearchViewModel>()
 
-    /*//viewModel 선언
-    private val viewModel: MainViewModel by viewModels()
+    //viewModel 선언
     //리사이클러 뷰 어댑터 생성
     private val busStopsAdapter: BusStopsAdapter by lazy {
         //리사이클러뷰 어댑터 생성시 함수를 받아와야해서 함수와 함께 선언
@@ -53,39 +46,29 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main){
     private var markerList = mutableListOf<Marker>()
     private var selfLat: Double? = null
     private var selfLon: Double? = null
-*/
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        //데이터 바인딩에 선언된 뷰모델 및 클래스 연결
-        /*bind {
-            vm = viewModel
+
+    override fun onCreateView(
+        inflater: LayoutInflater,
+        container: ViewGroup?,
+        savedInstanceState: Bundle?
+    ): View? {
+        _binding = FragmentSearchBinding.inflate(inflater, container, false)
+        return binding.root
+    }
+
+    override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
+        super.onViewCreated(view, savedInstanceState)
+        binding.apply {
+            vm = searchViewModel
             adapter = busStopsAdapter
-        }*/
-        setupJetpackNavigation()
+        }
+        collectDataInit()
+        naverMapSetting()
     }
 
-    private fun setupJetpackNavigation() {
-        val host = supportFragmentManager
-            .findFragmentById(R.id.booksearch_nav_host_fragment) as NavHostFragment? ?: return
-        navController = host.navController
-        binding.bottomNavigationView.setupWithNavController(navController)
-
-        appBarConfiguration = AppBarConfiguration(
-            setOf(
-                R.id.fragment_search, R.id.fragment_favorite, R.id.fragment_settings
-            )
-        )
-        //setupActionBarWithNavController(navController, appBarConfiguration)
-    }
-
-    override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
-    }
-
-/*
     private fun naverMapSetting(){
-        fusedLocationClient = LocationServices.getFusedLocationProviderClient(this)
-        val fm = supportFragmentManager
+        fusedLocationClient = LocationServices.getFusedLocationProviderClient(requireContext())
+        val fm = childFragmentManager
         val mapFragment = fm.findFragmentById(R.id.mapFragment) as MapFragment?
             ?: MapFragment.newInstance().also {
                 fm.beginTransaction().add(R.id.mapFragment, it).commit()
@@ -138,7 +121,7 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main){
     private fun collectDataInit(){
         //flow로 받아온 데이터 콜렉트 및 데이터 처리
         //util로 선언해서 사용함
-        collectLatestStateFlow(viewModel.busStops) {
+        collectLatestStateFlow(searchViewModel.busStops) {
             //Log.d("gwan2103","busStops >>>>>> $it")
             val busStopsList = it.successOrNull()?.body?.items?.item
             busStopsAdapter.submitList(busStopsList)
@@ -147,5 +130,10 @@ class MainActivity : BaseActivity<ActivityMainBinding>(R.layout.activity_main){
 
     companion object {
         private const val LOCATION_PERMISSION_REQUEST_CODE = 1000
-    }*/
+    }
+
+    override fun onDestroyView() {
+        _binding = null
+        super.onDestroyView()
+    }
 }

@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/booksearch_nav_graph"
+    app:startDestination="@id/fragment_search">
+
+    <fragment
+        android:id="@+id/fragment_favorite"
+        android:name="ksg.project.commutingguide.ui.favoriteBusStops.FavoriteFragment"
+        android:label="정류장 찾기"
+        tools:layout="@layout/fragment_favorite"/>
+
+    <fragment
+        android:id="@+id/fragment_search"
+        android:name="ksg.project.commutingguide.ui.searchBusStops.SearchFragment"
+        android:label="즐겨찾기"
+        tools:layout="@layout/fragment_search"/>
+    <fragment
+        android:id="@+id/fragment_settings"
+        android:name="ksg.project.commutingguide.ui.setting.SettingsFragment"
+        android:label="환경설정"
+        tools:layout="@layout/fragment_settings" />
+</navigation>
